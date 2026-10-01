@@ -1,0 +1,135 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://boy_emotions.gd" id="1_emotions"]
+
+[sub_resource type="StandardMaterial3D" id="SkinMaterial"]
+albedo_color = Color(0.72, 0.38, 0.22, 1)
+roughness = 0.7
+
+[sub_resource type="StandardMaterial3D" id="HairMaterial"]
+albedo_color = Color(0.035, 0.018, 0.01, 1)
+roughness = 0.8
+
+[sub_resource type="StandardMaterial3D" id="JacketMaterial"]
+albedo_color = Color(0.08, 0.16, 0.2, 1)
+metallic = 0.25
+roughness = 0.45
+
+[sub_resource type="StandardMaterial3D" id="PantsMaterial"]
+albedo_color = Color(0.06, 0.07, 0.08, 1)
+roughness = 0.6
+
+[sub_resource type="StandardMaterial3D" id="BootMaterial"]
+albedo_color = Color(0.02, 0.025, 0.035, 1)
+metallic = 0.45
+roughness = 0.35
+
+[sub_resource type="StandardMaterial3D" id="FaceMaterial"]
+albedo_color = Color(0.005, 0.008, 0.012, 1)
+roughness = 0.3
+
+[sub_resource type="StandardMaterial3D" id="EyeMaterial"]
+albedo_color = Color(0.92, 0.96, 1, 1)
+roughness = 0.2
+
+[sub_resource type="SphereMesh" id="HeadMesh"]
+radius = 0.31
+height = 0.62
+
+[sub_resource type="SphereMesh" id="HairMesh"]
+radius = 0.33
+height = 0.22
+
+[sub_resource type="BoxMesh" id="TorsoMesh"]
+size = Vector3(0.9, 1.05, 0.5)
+
+[sub_resource type="CapsuleMesh" id="LimbMesh"]
+radius = 0.14
+height = 1.0
+
+[sub_resource type="BoxMesh" id="BootMesh"]
+size = Vector3(0.3, 0.2, 0.5)
+
+[sub_resource type="SphereMesh" id="EyeMesh"]
+radius = 0.045
+height = 0.09
+
+[sub_resource type="BoxMesh" id="MouthMesh"]
+size = Vector3(0.16, 0.035, 0.025)
+
+[sub_resource type="BoxMesh" id="BeardMesh"]
+size = Vector3(0.24, 0.14, 0.035)
+
+[sub_resource type="StandardMaterial3D" id="BeardMaterial"]
+albedo_color = Color(0.06, 0.035, 0.02, 1)
+roughness = 0.85
+
+[node name="BoyCharacter" type="Node3D"]
+script = ExtResource("1_emotions")
+
+[node name="Torso" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.12, 0)
+mesh = SubResource("TorsoMesh")
+material_override = SubResource("JacketMaterial")
+
+[node name="Head" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.95, 0)
+mesh = SubResource("HeadMesh")
+material_override = SubResource("SkinMaterial")
+
+[node name="Hair" type="MeshInstance3D" parent="."]
+position = Vector3(0, 1.2, 0)
+mesh = SubResource("HairMesh")
+material_override = SubResource("HairMaterial")
+
+[node name="LeftEye" type="MeshInstance3D" parent="."]
+position = Vector3(-0.11, 0.99, 0.28)
+mesh = SubResource("EyeMesh")
+material_override = SubResource("EyeMaterial")
+
+[node name="RightEye" type="MeshInstance3D" parent="."]
+position = Vector3(0.11, 0.99, 0.28)
+mesh = SubResource("EyeMesh")
+material_override = SubResource("EyeMaterial")
+
+[node name="Mouth" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.8, 0.29)
+mesh = SubResource("MouthMesh")
+material_override = SubResource("FaceMaterial")
+
+[node name="Beard" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.77, 0.3)
+mesh = SubResource("BeardMesh")
+material_override = SubResource("BeardMaterial")
+
+[node name="LeftArm" type="MeshInstance3D" parent="."]
+position = Vector3(-0.58, 0.12, 0)
+rotation_degrees = Vector3(0, 0, -8)
+mesh = SubResource("LimbMesh")
+material_override = SubResource("JacketMaterial")
+
+[node name="RightArm" type="MeshInstance3D" parent="."]
+position = Vector3(0.58, 0.12, 0)
+rotation_degrees = Vector3(0, 0, 8)
+mesh = SubResource("LimbMesh")
+material_override = SubResource("JacketMaterial")
+
+[node name="LeftLeg" type="MeshInstance3D" parent="."]
+position = Vector3(-0.24, -0.72, 0)
+mesh = SubResource("LimbMesh")
+material_override = SubResource("PantsMaterial")
+
+[node name="RightLeg" type="MeshInstance3D" parent="."]
+position = Vector3(0.24, -0.72, 0)
+mesh = SubResource("LimbMesh")
+material_override = SubResource("PantsMaterial")
+
+[node name="LeftBoot" type="MeshInstance3D" parent="."]
+position = Vector3(-0.24, -1.25, -0.08)
+mesh = SubResource("BootMesh")
+material_override = SubResource("BootMaterial")
+
+[node name="RightBoot" type="MeshInstance3D" parent="."]
+position = Vector3(0.24, -1.25, -0.08)
+mesh = SubResource("BootMesh")
+material_override = SubResource("BootMaterial")

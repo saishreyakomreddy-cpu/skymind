@@ -1,0 +1,331 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://main_menu.gd" id="1_menu"]
+[ext_resource type="Texture2D" path="res://background.jpg" id="2_background"]
+[sub_resource type="StyleBoxFlat" id="PanelStyle"]
+bg_color = Color(0.025, 0.045, 0.09, 0.94)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.1, 0.65, 0.82, 0.8)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+content_margin_left = 48.0
+content_margin_top = 38.0
+content_margin_right = 48.0
+content_margin_bottom = 38.0
+
+[sub_resource type="StyleBoxFlat" id="ButtonNormal"]
+bg_color = Color(0.04, 0.09, 0.16, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.12, 0.32, 0.45, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="ButtonHover"]
+bg_color = Color(0.08, 0.28, 0.36, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.25, 0.9, 0.95, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="ButtonPressed"]
+bg_color = Color(0.12, 0.5, 0.52, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.55, 1, 0.95, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="Gradient" id="SkyGradient"]
+offsets = PackedFloat32Array(0, 0.42, 1)
+colors = PackedColorArray(0.004, 0.008, 0.045, 1, 0.035, 0.02, 0.2, 1, 0.14, 0.025, 0.32, 1)
+
+[sub_resource type="GradientTexture2D" id="SkyGradientTexture"]
+gradient = SubResource("SkyGradient")
+width = 1440
+height = 900
+fill_from = Vector2(0.5, 0)
+fill_to = Vector2(0.5, 1)
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_menu")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.008, 0.025, 0.06, 1)
+mouse_filter = 2
+
+[node name="CosmicSky" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("SkyGradientTexture")
+expand_mode = 1
+stretch_mode = 6
+mouse_filter = 2
+
+[node name="ReferenceBackground" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_background")
+expand_mode = 1
+stretch_mode = 6
+mouse_filter = 2
+
+[node name="Glow" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -220.0
+offset_top = -170.0
+offset_right = 220.0
+offset_bottom = 170.0
+theme_override_colors/font_color = Color(0.16, 0.42, 1, 0.2)
+theme_override_font_sizes/font_size = 280
+text = "O"
+horizontal_alignment = 1
+vertical_alignment = 1
+mouse_filter = 2
+
+[node name="StarsTop" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 110.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.78, 0.9, 1, 0.9)
+theme_override_colors/font_shadow_color = Color(0.2, 0.55, 1, 0.8)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 22
+text = "     *          .       +                 *       .          *       +       .\n          .          *          .       *          .          +          *"
+horizontal_alignment = 1
+mouse_filter = 2
+
+[node name="StarsBottom" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -150.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.55, 0.55, 1, 0.85)
+theme_override_colors/font_shadow_color = Color(0.7, 0.2, 1, 0.8)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 24
+text = ".       *          +       .          *       .          +          *       .\n    *          .          *          .          +       *          ."
+horizontal_alignment = 1
+mouse_filter = 2
+
+[node name="Status" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -190.0
+offset_top = 28.0
+offset_right = -28.0
+offset_bottom = 54.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0.3, 0.85, 0.82, 1)
+theme_override_font_sizes/font_size = 13
+text = "SYSTEM ONLINE  //  v1.0"
+horizontal_alignment = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(430, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("PanelStyle")
+
+[node name="VBox" type="VBoxContainer" parent="CenterContainer/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Title" type="Label" parent="CenterContainer/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.9, 1, 1)
+theme_override_font_sizes/font_size = 34
+text = "SKYMIND SIMULATION"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="CenterContainer/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.75, 0.9, 1)
+theme_override_font_sizes/font_size = 17
+text = "Your journey begins beneath the stars"
+horizontal_alignment = 1
+
+[node name="Introduction" type="Label" parent="CenterContainer/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.78, 0.88, 0.95, 1)
+theme_override_font_sizes/font_size = 15
+text = "Explore forgotten worlds, collect energy crystals,\nand discover the path to the living intelligence above."
+horizontal_alignment = 1
+
+[node name="Prompt" type="Label" parent="CenterContainer/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3, 0.85, 0.82, 1)
+theme_override_font_sizes/font_size = 13
+text = "SELECT AN OPTION"
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="CenterContainer/Panel/VBox"]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+
+[node name="PlayButton" type="Button" parent="CenterContainer/Panel/VBox"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.75, 1, 0.96, 1)
+theme_override_styles/normal = SubResource("ButtonNormal")
+theme_override_styles/hover = SubResource("ButtonHover")
+theme_override_styles/pressed = SubResource("ButtonPressed")
+text = "START"
+
+[node name="HowToPlayButton" type="Button" parent="CenterContainer/Panel/VBox"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.7, 0.85, 0.9, 1)
+theme_override_styles/normal = SubResource("ButtonNormal")
+theme_override_styles/hover = SubResource("ButtonHover")
+theme_override_styles/pressed = SubResource("ButtonPressed")
+text = "HOW TO PLAY"
+
+[node name="QuitButton" type="Button" parent="CenterContainer/Panel/VBox"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.7, 0.85, 0.9, 1)
+theme_override_styles/normal = SubResource("ButtonNormal")
+theme_override_styles/hover = SubResource("ButtonHover")
+theme_override_styles/pressed = SubResource("ButtonPressed")
+text = "QUIT"
+
+[node name="Instructions" type="Label" parent="CenterContainer/Panel/VBox"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75, 0.88, 0.95, 1)
+theme_override_font_sizes/font_size = 14
+text = "WASD / ARROWS: MOVE\nSPACE / ENTER: JUMP\nMOUSE: LOOK\nLEFT CLICK: ATTACK\nM: JOURNEY MAP\nE: ACTIVATE PUZZLE SWITCHES\nFind crystals, keys, camps, and hidden paths."
+horizontal_alignment = 1
+
+[node name="IntroOverlay" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="IntroOverlay"]
+visible = false
+custom_minimum_size = Vector2(430, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("PanelStyle")
+
+[node name="VBox" type="VBoxContainer" parent="IntroOverlay/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Title" type="Label" parent="IntroOverlay/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.9, 1, 1)
+theme_override_font_sizes/font_size = 38
+text = "WELCOME TO SKYMIND"
+horizontal_alignment = 1
+
+[node name="Story" type="Label" parent="IntroOverlay/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.78, 0.88, 0.95, 1)
+theme_override_font_sizes/font_size = 16
+text = "The SkyMind has awakened.\nA new adventure is waiting for you."
+horizontal_alignment = 1
+
+[node name="NextButton" type="Button" parent="IntroOverlay/Panel/VBox"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75, 1, 0.96, 1)
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("ButtonNormal")
+theme_override_styles/hover = SubResource("ButtonHover")
+theme_override_styles/pressed = SubResource("ButtonPressed")
+text = "NEXT"
+
+[node name="LoadingContent" type="VBoxContainer" parent="IntroOverlay"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="IntroOverlay/LoadingContent"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75, 0.92, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.1, 0.45, 1, 0.9)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 38
+text = "SKYMIND"
+horizontal_alignment = 1
+
+[node name="Loading" type="Label" parent="IntroOverlay/LoadingContent"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.95, 0.95, 1)
+theme_override_font_sizes/font_size = 18
+text = "LOADING... 100%"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="CenterContainer/Panel/VBox/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="CenterContainer/Panel/VBox/HowToPlayButton" to="." method="_on_how_to_play_button_pressed"]
+[connection signal="pressed" from="CenterContainer/Panel/VBox/QuitButton" to="." method="_on_quit_button_pressed"]
+

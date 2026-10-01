@@ -1,0 +1,679 @@
+[gd_scene format=3 uid="uid://bg5r7ibj3jo6n"]
+
+[ext_resource type="Script" uid="uid://bx52ukbmd147" path="res://player.gd" id="1_01esg"]
+[ext_resource type="Script" path="res://moving_platform.gd" id="2_moving"]
+[ext_resource type="Script" path="res://rotating_obstacle.gd" id="3_rotating"]
+[ext_resource type="Script" path="res://falling_object.gd" id="4_falling"]
+[ext_resource type="Script" path="res://drone.gd" id="5_drone"]
+[ext_resource type="PackedScene" path="res://boy_character.tscn" id="6_boy"]
+[ext_resource type="Script" path="res://energy_crystal.gd" id="7_crystal"]
+[ext_resource type="Script" path="res://bird.gd" id="8_bird"]
+[ext_resource type="Shader" path="res://monochrome.gdshader" id="9_monochrome"]
+
+[sub_resource type="ShaderMaterial" id="MonochromeMaterial"]
+shader = ExtResource("9_monochrome")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5oikk"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_0sjhq"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="SphereMesh" id="SphereMesh_0sjhq"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_0sjhq"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sky"]
+sky_top_color = Color(0.06, 0.06, 0.06, 1)
+sky_horizon_color = Color(0.8, 0.8, 0.8, 1)
+ground_bottom_color = Color(0.04, 0.04, 0.04, 1)
+ground_horizon_color = Color(0.5, 0.5, 0.5, 1)
+sun_angle_max = 18.0
+
+[sub_resource type="Sky" id="Sky_sky"]
+sky_material = SubResource("ProceduralSkyMaterial_sky")
+
+[sub_resource type="Environment" id="Environment_sky"]
+background_mode = 2
+sky = SubResource("Sky_sky")
+ambient_light_source = 3
+ambient_light_color = Color(0.9, 0.9, 0.9, 1)
+ambient_light_energy = 0.75
+reflected_light_source = 2
+tonemap_mode = 2
+fog_enabled = true
+fog_light_color = Color(0.9, 0.9, 0.9, 1)
+fog_light_energy = 0.55
+fog_density = 0.012
+fog_sky_affect = 0.45
+background_energy_multiplier = 1.0
+
+[sub_resource type="StandardMaterial3D" id="PlatformMaterial_main"]
+albedo_color = Color(0.25, 0.25, 0.25, 1)
+metallic = 0.6
+roughness = 0.35
+
+[sub_resource type="StandardMaterial3D" id="PlatformMaterial_accent"]
+albedo_color = Color(0.55, 0.55, 0.55, 1)
+emission_enabled = true
+emission = Color(0.8, 0.8, 0.8, 1)
+emission_energy_multiplier = 0.8
+metallic = 0.4
+roughness = 0.25
+
+[sub_resource type="CylinderMesh" id="CrystalMesh_energy"]
+top_radius = 0.18
+bottom_radius = 0.28
+height = 0.9
+radial_segments = 6
+
+[sub_resource type="StandardMaterial3D" id="CrystalMaterial_energy"]
+albedo_color = Color(0.65, 0.95, 1, 1)
+emission_enabled = true
+emission = Color(0.25, 0.8, 1, 1)
+emission_energy_multiplier = 2.5
+metallic = 0.2
+roughness = 0.12
+
+[sub_resource type="BoxMesh" id="DistantIslandMesh"]
+size = Vector3(9, 1.2, 5)
+
+[sub_resource type="StandardMaterial3D" id="DistantIslandMaterial"]
+albedo_color = Color(0.08, 0.12, 0.15, 1)
+metallic = 0.45
+roughness = 0.85
+
+[sub_resource type="SphereMesh" id="CloudMesh"]
+radius = 1.0
+height = 2.0
+
+[sub_resource type="StandardMaterial3D" id="CloudMaterial"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.75, 0.75, 0.75, 0.45)
+emission_enabled = false
+
+[sub_resource type="StandardMaterial3D" id="StoneMaterial"]
+albedo_color = Color(0.45, 0.45, 0.45, 1)
+roughness = 0.92
+
+[sub_resource type="StandardMaterial3D" id="GrassMaterial"]
+albedo_color = Color(0.7, 0.7, 0.7, 1)
+roughness = 1.0
+
+[sub_resource type="StandardMaterial3D" id="WaterfallMaterial"]
+albedo_color = Color(0.85, 0.85, 0.85, 0.8)
+transparency = 1
+emission_enabled = true
+emission = Color(0.95, 0.95, 0.95, 1)
+emission_energy_multiplier = 0.9
+
+[sub_resource type="BoxMesh" id="RuinPillarMesh"]
+size = Vector3(1.2, 5, 1.2)
+
+[sub_resource type="BoxMesh" id="PathMesh"]
+size = Vector3(3.5, 0.12, 18)
+
+[sub_resource type="SphereMesh" id="MoonMesh"]
+radius = 2.2
+height = 4.4
+
+[sub_resource type="StandardMaterial3D" id="MoonMaterial"]
+shading_mode = 0
+albedo_color = Color(0.72, 0.88, 1, 1)
+emission_enabled = true
+emission = Color(0.42, 0.72, 1, 1)
+emission_energy_multiplier = 2.8
+
+[sub_resource type="CylinderMesh" id="BeaconMesh"]
+top_radius = 0.12
+bottom_radius = 0.12
+height = 5.0
+radial_segments = 8
+
+[sub_resource type="StandardMaterial3D" id="BeaconMaterial"]
+albedo_color = Color(0.08, 0.7, 1, 1)
+emission_enabled = true
+emission = Color(0.02, 0.75, 1, 1)
+emission_energy_multiplier = 3.5
+
+[sub_resource type="TorusMesh" id="SkyMindIconMesh"]
+inner_radius = 1.7
+outer_radius = 1.9
+rings = 32
+ring_segments = 12
+
+[sub_resource type="SphereMesh" id="SkyMindCoreMesh"]
+radius = 0.65
+height = 1.3
+
+[sub_resource type="BoxMesh" id="MirrorMesh"]
+size = Vector3(4.5, 3.5, 0.12)
+
+[sub_resource type="StandardMaterial3D" id="MirrorMaterial"]
+albedo_color = Color(0.18, 0.45, 0.58, 1)
+metallic = 1.0
+roughness = 0.04
+emission_enabled = true
+emission = Color(0.03, 0.12, 0.2, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="BoxShape3D" id="MovingPlatformShape"]
+size = Vector3(4, 0.6, 3)
+
+[sub_resource type="BoxMesh" id="MovingPlatformMesh"]
+size = Vector3(4, 0.6, 3)
+
+[sub_resource type="BoxShape3D" id="RotatingObstacleShape"]
+size = Vector3(6, 0.8, 0.6)
+
+[sub_resource type="BoxMesh" id="RotatingObstacleMesh"]
+size = Vector3(6, 0.8, 0.6)
+
+[sub_resource type="StandardMaterial3D" id="DangerMaterial"]
+albedo_color = Color(0.85, 0.03, 0.06, 1)
+emission_enabled = true
+emission = Color(0.7, 0.01, 0.02, 1)
+emission_energy_multiplier = 2.0
+metallic = 0.25
+roughness = 0.3
+
+[sub_resource type="SphereShape3D" id="FallingObjectShape"]
+radius = 0.7
+
+[sub_resource type="SphereMesh" id="FallingObjectMesh"]
+radius = 0.7
+height = 1.4
+
+[sub_resource type="SphereMesh" id="DroneMesh"]
+radius = 0.6
+height = 1.2
+
+[sub_resource type="StandardMaterial3D" id="DroneMaterial"]
+albedo_color = Color(0.95, 0.2, 0.65, 1)
+emission_enabled = true
+emission = Color(0.8, 0.04, 0.35, 1)
+emission_energy_multiplier = 2.5
+metallic = 0.7
+roughness = 0.18
+
+[node name="skymindsimulation" type="Node3D" unique_id=747087019]
+
+[node name="ground" type="CSGBox3D" parent="." unique_id=624774771]
+position = Vector3(0, -1, 0)
+size = Vector3(12, 0.4, 12)
+use_collision = true
+material = SubResource("PlatformMaterial_main")
+
+[node name="SkyStep01" type="CSGBox3D" parent="."]
+position = Vector3(0, 0.2, -4)
+size = Vector3(4, 0.4, 3)
+use_collision = true
+material = SubResource("StoneMaterial")
+
+[node name="SkyStep02" type="CSGBox3D" parent="."]
+position = Vector3(0, 0.9, -7)
+size = Vector3(4, 0.4, 3)
+use_collision = true
+material = SubResource("StoneMaterial")
+
+[node name="SkyStep03" type="CSGBox3D" parent="."]
+position = Vector3(-2, 1.7, -10)
+size = Vector3(4, 0.4, 3)
+use_collision = true
+material = SubResource("StoneMaterial")
+
+[node name="SkyStep04" type="CSGBox3D" parent="."]
+position = Vector3(-4, 2.6, -13)
+size = Vector3(4, 0.4, 3)
+use_collision = true
+material = SubResource("StoneMaterial")
+
+[node name="SkyStep05" type="CSGBox3D" parent="."]
+position = Vector3(-2, 3.6, -16)
+size = Vector3(4, 0.4, 3)
+use_collision = true
+material = SubResource("StoneMaterial")
+
+[node name="SkyStep06" type="CSGBox3D" parent="."]
+position = Vector3(2, 4.6, -19)
+size = Vector3(4, 0.4, 3)
+use_collision = true
+material = SubResource("StoneMaterial")
+
+[node name="PlatformEast" type="CSGBox3D" parent="." ]
+position = Vector3(10, 1, -4)
+size = Vector3(6, 0.8, 6)
+use_collision = true
+material = SubResource("PlatformMaterial_accent")
+
+[node name="PlatformNorth" type="CSGBox3D" parent="." ]
+position = Vector3(-5, 3, -13)
+size = Vector3(8, 0.8, 5)
+use_collision = true
+material = SubResource("PlatformMaterial_main")
+
+[node name="PlatformWest" type="CSGBox3D" parent="." ]
+position = Vector3(-12, 0, 5)
+size = Vector3(5, 0.8, 8)
+use_collision = true
+material = SubResource("PlatformMaterial_accent")
+
+[node name="PlatformHigh" type="CSGBox3D" parent="." ]
+position = Vector3(5, 5, -22)
+size = Vector3(5, 0.8, 5)
+use_collision = true
+material = SubResource("PlatformMaterial_main")
+
+[node name="MovingPlatform" type="AnimatableBody3D" parent="."]
+position = Vector3(0, 1, -8.5)
+script = ExtResource("2_moving")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingPlatform"]
+shape = SubResource("MovingPlatformShape")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingPlatform"]
+mesh = SubResource("MovingPlatformMesh")
+material_override = SubResource("PlatformMaterial_accent")
+
+[node name="DangerZone" type="CSGBox3D" parent="." groups=["danger_zone"]]
+position = Vector3(-3, -0.75, 3)
+size = Vector3(4, 0.1, 3)
+material = SubResource("DangerMaterial")
+
+[node name="RotatingObstacle" type="AnimatableBody3D" parent="."]
+position = Vector3(2, 0.5, 4)
+script = ExtResource("3_rotating")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RotatingObstacle"]
+shape = SubResource("RotatingObstacleShape")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RotatingObstacle"]
+mesh = SubResource("RotatingObstacleMesh")
+material_override = SubResource("DangerMaterial")
+
+[node name="FallingObject" type="RigidBody3D" parent="." groups=["falling_object"]]
+position = Vector3(2, 8, 4)
+mass = 2.0
+gravity_scale = 1.0
+script = ExtResource("4_falling")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FallingObject"]
+shape = SubResource("FallingObjectShape")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="FallingObject"]
+mesh = SubResource("FallingObjectMesh")
+material_override = SubResource("DangerMaterial")
+
+[node name="Drone" type="Node3D" parent="." groups=["enemy"]]
+position = Vector3(0, 4, -3)
+script = ExtResource("5_drone")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Drone"]
+mesh = SubResource("DroneMesh")
+material_override = SubResource("DroneMaterial")
+
+[node name="EnergyCrystal01" type="MeshInstance3D" parent="." groups=["energy_crystal"]]
+position = Vector3(2, 0.45, -2)
+script = ExtResource("7_crystal")
+mesh = SubResource("CrystalMesh_energy")
+material_override = SubResource("CrystalMaterial_energy")
+
+[node name="EnergyCrystal02" type="MeshInstance3D" parent="." groups=["energy_crystal"]]
+position = Vector3(-3, 0.45, -3)
+script = ExtResource("7_crystal")
+mesh = SubResource("CrystalMesh_energy")
+material_override = SubResource("CrystalMaterial_energy")
+
+[node name="EnergyCrystal03" type="MeshInstance3D" parent="." groups=["energy_crystal"]]
+position = Vector3(10, 2.05, -4)
+script = ExtResource("7_crystal")
+mesh = SubResource("CrystalMesh_energy")
+material_override = SubResource("CrystalMaterial_energy")
+
+[node name="EnergyCrystal04" type="MeshInstance3D" parent="." groups=["energy_crystal"]]
+position = Vector3(-12, 1.05, 5)
+script = ExtResource("7_crystal")
+mesh = SubResource("CrystalMesh_energy")
+material_override = SubResource("CrystalMaterial_energy")
+
+[node name="EnergyCrystal05" type="MeshInstance3D" parent="." groups=["energy_crystal"]]
+position = Vector3(-5, 4.05, -13)
+script = ExtResource("7_crystal")
+mesh = SubResource("CrystalMesh_energy")
+material_override = SubResource("CrystalMaterial_energy")
+
+[node name="DecoyCrystal01" type="MeshInstance3D" parent="." groups=["decoy_crystal"]]
+position = Vector3(5, 0.45, 4)
+script = ExtResource("7_crystal")
+mesh = SubResource("CrystalMesh_energy")
+material_override = SubResource("CrystalMaterial_energy")
+
+[node name="DecoyCrystal02" type="MeshInstance3D" parent="." groups=["decoy_crystal"]]
+position = Vector3(-5, 0.45, 5)
+script = ExtResource("7_crystal")
+mesh = SubResource("CrystalMesh_energy")
+material_override = SubResource("CrystalMaterial_energy")
+
+[node name="DecoyCrystal03" type="MeshInstance3D" parent="." groups=["decoy_crystal"]]
+position = Vector3(6, 0.45, -6)
+script = ExtResource("7_crystal")
+mesh = SubResource("CrystalMesh_energy")
+material_override = SubResource("CrystalMaterial_energy")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_sky")
+
+[node name="AdventureBackdrop" type="Node3D" parent="."]
+
+[node name="AncientPath" type="MeshInstance3D" parent="AdventureBackdrop"]
+position = Vector3(0, 0.25, -8)
+mesh = SubResource("PathMesh")
+material_override = SubResource("StoneMaterial")
+
+[node name="MossPatchLeft" type="CSGBox3D" parent="AdventureBackdrop"]
+position = Vector3(-4, 0.22, -4)
+size = Vector3(3, 0.12, 4)
+material = SubResource("GrassMaterial")
+
+[node name="MossPatchRight" type="CSGBox3D" parent="AdventureBackdrop"]
+position = Vector3(4, 0.22, -12)
+size = Vector3(3, 0.12, 4)
+material = SubResource("GrassMaterial")
+
+[node name="RuinPillarLeft" type="MeshInstance3D" parent="AdventureBackdrop"]
+position = Vector3(-8, 2.5, -17)
+rotation_degrees = Vector3(0, 0, -7)
+mesh = SubResource("RuinPillarMesh")
+material_override = SubResource("StoneMaterial")
+
+[node name="RuinPillarRight" type="MeshInstance3D" parent="AdventureBackdrop"]
+position = Vector3(8, 2.5, -20)
+rotation_degrees = Vector3(0, 0, 9)
+mesh = SubResource("RuinPillarMesh")
+material_override = SubResource("StoneMaterial")
+
+[node name="Waterfall" type="MeshInstance3D" parent="AdventureBackdrop"]
+position = Vector3(-5, 2.5, -15)
+scale = Vector3(1.5, 5, 1)
+mesh = SubResource("PathMesh")
+material_override = SubResource("WaterfallMaterial")
+
+[node name="BirdFlockLeft" type="Node3D" parent="AdventureBackdrop"]
+position = Vector3(-12, 12, -20)
+scale = Vector3(1.2, 1.2, 1.2)
+script = ExtResource("8_bird")
+flight_speed = 0.9
+
+[node name="BirdFlockCenter" type="Node3D" parent="AdventureBackdrop"]
+position = Vector3(5, 15, -30)
+script = ExtResource("8_bird")
+flight_speed = 0.7
+flight_radius = 6.0
+
+[node name="BirdFlockRight" type="Node3D" parent="AdventureBackdrop"]
+position = Vector3(18, 10, -24)
+scale = Vector3(0.8, 0.8, 0.8)
+script = ExtResource("8_bird")
+flight_speed = 1.1
+flight_radius = 7.0
+
+[node name="Moon" type="MeshInstance3D" parent="AdventureBackdrop"]
+position = Vector3(-12, 18, -42)
+visible = false
+mesh = SubResource("MoonMesh")
+material_override = SubResource("MoonMaterial")
+
+[node name="MoonGlow" type="OmniLight3D" parent="AdventureBackdrop"]
+position = Vector3(-12, 18, -42)
+visible = false
+light_color = Color(0.3, 0.65, 1, 1)
+light_energy = 4.0
+omni_range = 24.0
+
+[node name="DistantIslandLeft" type="MeshInstance3D" parent="AdventureBackdrop"]
+position = Vector3(-24, 7, -32)
+rotation_degrees = Vector3(8, 18, -6)
+mesh = SubResource("DistantIslandMesh")
+material_override = SubResource("DistantIslandMaterial")
+
+[node name="DistantIslandRight" type="MeshInstance3D" parent="AdventureBackdrop"]
+position = Vector3(28, 11, -42)
+rotation_degrees = Vector3(-5, -20, 8)
+mesh = SubResource("DistantIslandMesh")
+material_override = SubResource("DistantIslandMaterial")
+
+[node name="CloudClusterLeft" type="MeshInstance3D" parent="AdventureBackdrop"]
+position = Vector3(-18, 5, -18)
+scale = Vector3(5, 1.2, 2)
+mesh = SubResource("CloudMesh")
+material_override = SubResource("CloudMaterial")
+
+[node name="CloudClusterRight" type="MeshInstance3D" parent="AdventureBackdrop"]
+position = Vector3(18, 8, -26)
+scale = Vector3(6, 1.4, 2.2)
+mesh = SubResource("CloudMesh")
+material_override = SubResource("CloudMaterial")
+
+[node name="CloudPuffLeft" type="MeshInstance3D" parent="AdventureBackdrop"]
+position = Vector3(-14, 6, -20)
+scale = Vector3(3.2, 1.5, 1.8)
+mesh = SubResource("CloudMesh")
+material_override = SubResource("CloudMaterial")
+
+[node name="CloudPuffRight" type="MeshInstance3D" parent="AdventureBackdrop"]
+position = Vector3(23, 9, -30)
+scale = Vector3(3.8, 1.6, 2)
+mesh = SubResource("CloudMesh")
+material_override = SubResource("CloudMaterial")
+
+[node name="SkyBeacon" type="MeshInstance3D" parent="AdventureBackdrop"]
+position = Vector3(0, 9, -34)
+mesh = SubResource("BeaconMesh")
+material_override = SubResource("BeaconMaterial")
+
+[node name="SkyMindIcon" type="MeshInstance3D" parent="AdventureBackdrop"]
+position = Vector3(0, 18, -38)
+rotation_degrees = Vector3(90, 0, 0)
+mesh = SubResource("SkyMindIconMesh")
+material_override = SubResource("BeaconMaterial")
+
+[node name="SkyMindCore" type="MeshInstance3D" parent="AdventureBackdrop"]
+position = Vector3(0, 18, -38)
+mesh = SubResource("SkyMindCoreMesh")
+material_override = SubResource("BeaconMaterial")
+
+[node name="SkyMindGlow" type="OmniLight3D" parent="AdventureBackdrop"]
+position = Vector3(0, 18, -38)
+light_color = Color(0.15, 0.65, 1, 1)
+light_energy = 6.0
+omni_range = 30.0
+
+[node name="SkyMindTitle" type="Label3D" parent="AdventureBackdrop"]
+position = Vector3(0, 14.5, -38)
+text = "SKYMIND"
+font_size = 64
+outline_size = 12
+modulate = Color(0.55, 0.9, 1, 1)
+emission_energy_multiplier = 2.0
+billboard = 1
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="EnergyLabel" type="Label" parent="HUD"]
+offset_left = 28.0
+offset_top = 24.0
+offset_right = 260.0
+offset_bottom = 60.0
+theme_override_colors/font_color = Color(0.55, 0.95, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.08, 0.15, 0.8)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 24
+text = "ENERGY: 0 / 3"
+
+[node name="LevelLabel" type="Label" parent="HUD"]
+offset_left = 28.0
+offset_top = 4.0
+offset_right = 420.0
+offset_bottom = 26.0
+theme_override_colors/font_color = Color(0.7, 0.8, 0.95, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.08, 0.15, 0.8)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 14
+text = "LEVEL 1: FORGOTTEN MIND"
+
+[node name="MissionLabel" type="Label" parent="HUD"]
+offset_left = 28.0
+offset_top = 62.0
+offset_right = 420.0
+offset_bottom = 92.0
+theme_override_colors/font_color = Color(1, 0.85, 0.35, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.08, 0.15, 0.8)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 18
+text = "MISSION: Collect 3 Energy Crystals"
+
+[node name="HealthLabel" type="Label" parent="HUD"]
+offset_left = 28.0
+offset_top = 94.0
+offset_right = 230.0
+offset_bottom = 124.0
+theme_override_colors/font_color = Color(1, 0.42, 0.42, 1)
+theme_override_colors/font_shadow_color = Color(0.15, 0, 0, 0.8)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 18
+text = "HEALTH: 100"
+
+[node name="ChancesLabel" type="Label" parent="HUD"]
+offset_left = 28.0
+offset_top = 118.0
+offset_right = 230.0
+offset_bottom = 146.0
+theme_override_colors/font_color = Color(1, 0.8, 0.35, 1)
+theme_override_font_sizes/font_size = 18
+text = "CHANCES: 3 / 3"
+
+[node name="Crosshair" type="Label" parent="HUD"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -16.0
+offset_right = 8.0
+offset_bottom = 16.0
+theme_override_colors/font_color = Color(0.65, 0.95, 1, 0.9)
+theme_override_colors/font_shadow_color = Color(0, 0.1, 0.2, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 24
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StoryLabel" type="Label" parent="HUD"]
+offset_left = 28.0
+offset_top = 178.0
+offset_right = 650.0
+offset_bottom = 204.0
+theme_override_colors/font_color = Color(0.65, 0.82, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "A strange signal is calling from beyond the floating islands."
+autowrap_mode = 2
+[node name="MonochromeFilter" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="Filter" type="ColorRect" parent="MonochromeFilter"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+material = SubResource("MonochromeMaterial")
+
+[node name="ControlsLabel" type="Label" parent="HUD"]
+offset_left = 28.0
+offset_top = 152.0
+offset_right = 460.0
+offset_bottom = 176.0
+theme_override_colors/font_color = Color(0.68, 0.75, 0.86, 1)
+theme_override_font_sizes/font_size = 14
+text = "MOVE: WASD / ARROWS    JUMP: SPACE / ENTER    ATTACK: LEFT CLICK"
+
+[node name="sun" type="DirectionalLight3D" parent="." unique_id=1145875251]
+transform = Transform3D(0.8660254, 0.17101006, -0.4698463, 0, 0.9396926, 0.34202012, 0.5, -0.2961981, 0.81379765, 0, 0, 0)
+light_color = Color(1, 1, 1, 1)
+light_energy = 1.5
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1064248308]
+transform = Transform3D(1, 0, 0, 0, 0.9396927, 0.34202015, 0, -0.34202015, 0.9396927, 0, 5, 10)
+current = true
+
+[node name="SkyCamp" type="Marker3D" parent="." groups=["checkpoint"]]
+position = Vector3(0, 0.25, 0)
+
+[node name="player" type="CharacterBody3D" parent="." unique_id=1981965016 groups=["player"]]
+position = Vector3(0, 0.25, 0)
+floor_snap_length = 0.4
+script = ExtResource("1_01esg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="player" unique_id=688673937]
+shape = SubResource("CapsuleShape3D_5oikk")
+
+[node name="dronebody" type="CSGBox3D" parent="player" unique_id=1906210434]
+size = Vector3(2, 0.4, 2)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="player" unique_id=633523834]
+mesh = SubResource("CapsuleMesh_0sjhq")
+visible = false
+
+[node name="BoyCharacter" parent="player" instance=ExtResource("6_boy")]
+position = Vector3(0, 0.4, 0)
+
+[node name="Camera3D" type="Camera3D" parent="player" unique_id=1323801446]
+transform = Transform3D(0.99904823, -0.007574427, 0.04295671, 0, 0.9848077, 0.17364818, -0.043619387, -0.17348291, 0.98387045, 0, 2.5, 5)
+current = true
+
+[node name="MysteryObject" type="MeshInstance3D" parent="." unique_id=1809629065]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, 0)
+mesh = SubResource("SphereMesh_0sjhq")
+
+[node name="Mystreychair" type="MeshInstance3D" parent="." unique_id=426052145]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, 0)
+mesh = SubResource("BoxMesh_0sjhq")
+
+[node name="Mystreybox" type="MeshInstance3D" parent="." unique_id=1785247934]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -5)
+mesh = SubResource("BoxMesh_0sjhq")
+
+[node name="Mystreytable" type="MeshInstance3D" parent="." unique_id=812603631]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, 3)
+mesh = SubResource("BoxMesh_0sjhq")
+	[node name="ConfusingSignEast" type="Label3D" parent="."]
+	position = Vector3(10, 3.2, -4)
+	text = "EXIT ->"
+	font_size = 48
+	outline_size = 10
+	billboard = 1
+
+	[node name="ConfusingSignWest" type="Label3D" parent="."]
+	position = Vector3(-12, 2.2, 5)
+	text = "<- EXIT"
+	font_size = 48
+	outline_size = 10
+	billboard = 1
+
+	[node name="ConfusingSignHigh" type="Label3D" parent="."]
+	position = Vector3(5, 7.2, -22)
+	text = "TURN BACK"
+	font_size = 48
+	outline_size = 10
+	billboard = 1

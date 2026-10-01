@@ -1,0 +1,253 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://player.gd" id="1_player"]
+[ext_resource type="PackedScene" path="res://boy_character.tscn" id="2_boy"]
+[ext_resource type="Script" path="res://energy_crystal.gd" id="3_crystal"]
+[sub_resource type="CapsuleShape3D" id="PlayerShape"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="ProceduralSkyMaterial" id="FinalSkyMaterial"]
+sky_top_color = Color(0.12, 0.3, 0.72, 1)
+sky_horizon_color = Color(0.62, 0.8, 0.96, 1)
+ground_bottom_color = Color(0.08, 0.12, 0.2, 1)
+ground_horizon_color = Color(0.62, 0.78, 0.9, 1)
+
+[sub_resource type="Sky" id="FinalSky"]
+sky_material = SubResource("FinalSkyMaterial")
+
+[sub_resource type="Environment" id="FinalEnvironment"]
+background_mode = 2
+sky = SubResource("FinalSky")
+ambient_light_source = 3
+ambient_light_color = Color(0.78, 0.86, 1, 1)
+ambient_light_energy = 0.8
+tonemap_mode = 2
+fog_enabled = true
+fog_light_color = Color(0.62, 0.78, 0.92, 1)
+fog_light_energy = 0.5
+fog_density = 0.014
+fog_sky_affect = 0.5
+
+[sub_resource type="StandardMaterial3D" id="FinalFloorMaterial"]
+albedo_color = Color(0.34, 0.34, 0.3, 1)
+metallic = 0.2
+roughness = 0.86
+
+[sub_resource type="StandardMaterial3D" id="FinalAccentMaterial"]
+albedo_color = Color(0.2, 0.42, 0.3, 1)
+emission_enabled = true
+emission = Color(0.04, 0.4, 0.75, 1)
+emission_energy_multiplier = 1.7
+metallic = 0.25
+roughness = 0.6
+
+[sub_resource type="CylinderMesh" id="CrystalMesh"]
+top_radius = 0.18
+bottom_radius = 0.28
+height = 0.9
+radial_segments = 6
+
+[sub_resource type="StandardMaterial3D" id="CrystalMaterial"]
+albedo_color = Color(0.65, 0.95, 1, 1)
+emission_enabled = true
+emission = Color(0.25, 0.8, 1, 1)
+emission_energy_multiplier = 5.0
+
+[node name="FinalSimulation" type="Node3D"]
+
+[node name="Environment" type="WorldEnvironment" parent="."]
+environment = SubResource("FinalEnvironment")
+
+[node name="CorePlatform" type="CSGBox3D" parent="."]
+position = Vector3(0, -1, 0)
+size = Vector3(14, 0.5, 14)
+use_collision = true
+material = SubResource("FinalFloorMaterial")
+
+[node name="NorthPlatform" type="CSGBox3D" parent="."]
+position = Vector3(0, 2, -10)
+size = Vector3(6, 0.5, 4)
+use_collision = true
+material = SubResource("FinalAccentMaterial")
+
+[node name="EastPlatform" type="CSGBox3D" parent="."]
+position = Vector3(10, 4, 0)
+size = Vector3(4, 0.5, 6)
+use_collision = true
+material = SubResource("FinalFloorMaterial")
+
+[node name="WestPlatform" type="CSGBox3D" parent="."]
+position = Vector3(-10, 3, 0)
+size = Vector3(4, 0.5, 6)
+use_collision = true
+material = SubResource("FinalFloorMaterial")
+
+[node name="EnergyCrystal01" type="MeshInstance3D" parent="." groups=["energy_crystal"]]
+position = Vector3(-4, 0, -4)
+script = ExtResource("3_crystal")
+mesh = SubResource("CrystalMesh")
+material_override = SubResource("CrystalMaterial")
+
+[node name="EnergyCrystal02" type="MeshInstance3D" parent="." groups=["energy_crystal"]]
+position = Vector3(4, 0, -4)
+script = ExtResource("3_crystal")
+mesh = SubResource("CrystalMesh")
+material_override = SubResource("CrystalMaterial")
+
+[node name="EnergyCrystal03" type="MeshInstance3D" parent="." groups=["energy_crystal"]]
+position = Vector3(0, 2, -10)
+script = ExtResource("3_crystal")
+mesh = SubResource("CrystalMesh")
+material_override = SubResource("CrystalMaterial")
+
+[node name="EnergyCrystal04" type="MeshInstance3D" parent="." groups=["energy_crystal"]]
+position = Vector3(10, 4, 0)
+script = ExtResource("3_crystal")
+mesh = SubResource("CrystalMesh")
+material_override = SubResource("CrystalMaterial")
+
+[node name="EnergyCrystal05" type="MeshInstance3D" parent="." groups=["energy_crystal"]]
+position = Vector3(-10, 3, 0)
+script = ExtResource("3_crystal")
+mesh = SubResource("CrystalMesh")
+material_override = SubResource("CrystalMaterial")
+
+[node name="EnergyCrystal06" type="MeshInstance3D" parent="." groups=["energy_crystal"]]
+position = Vector3(-5, 0, 0)
+script = ExtResource("3_crystal")
+mesh = SubResource("CrystalMesh")
+material_override = SubResource("CrystalMaterial")
+
+[node name="EnergyCrystal07" type="MeshInstance3D" parent="." groups=["energy_crystal"]]
+position = Vector3(5, 0, 0)
+script = ExtResource("3_crystal")
+mesh = SubResource("CrystalMesh")
+material_override = SubResource("CrystalMaterial")
+
+[node name="EnergyCrystal08" type="MeshInstance3D" parent="." groups=["energy_crystal"]]
+position = Vector3(0, 0, 4)
+script = ExtResource("3_crystal")
+mesh = SubResource("CrystalMesh")
+material_override = SubResource("CrystalMaterial")
+
+[node name="EnergyCrystal09" type="MeshInstance3D" parent="." groups=["energy_crystal"]]
+position = Vector3(-3, 0, 4)
+script = ExtResource("3_crystal")
+mesh = SubResource("CrystalMesh")
+material_override = SubResource("CrystalMaterial")
+
+[node name="EnergyCrystal10" type="MeshInstance3D" parent="." groups=["energy_crystal"]]
+position = Vector3(3, 0, 4)
+script = ExtResource("3_crystal")
+mesh = SubResource("CrystalMesh")
+material_override = SubResource("CrystalMaterial")
+
+[node name="DecoyCrystal01" type="MeshInstance3D" parent="." groups=["decoy_crystal"]]
+position = Vector3(-1, 0, -1)
+script = ExtResource("3_crystal")
+mesh = SubResource("CrystalMesh")
+material_override = SubResource("CrystalMaterial")
+
+[node name="DecoyCrystal02" type="MeshInstance3D" parent="." groups=["decoy_crystal"]]
+position = Vector3(1, 0, -1)
+script = ExtResource("3_crystal")
+mesh = SubResource("CrystalMesh")
+material_override = SubResource("CrystalMaterial")
+
+[node name="CoreLight" type="DirectionalLight3D" parent="."]
+rotation_degrees = Vector3(-55, -35, 0)
+light_color = Color(1, 0.88, 0.68, 1)
+light_energy = 1.4
+shadow_enabled = true
+
+[node name="MemoryCamp" type="Marker3D" parent="." groups=["checkpoint"]]
+position = Vector3(0, 1, 5)
+
+[node name="player" type="CharacterBody3D" parent="." groups=["player"]]
+position = Vector3(0, 1, 5)
+floor_snap_length = 0.4
+script = ExtResource("1_player")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="player"]
+shape = SubResource("PlayerShape")
+
+[node name="BoyCharacter" parent="player" instance=ExtResource("2_boy")]
+position = Vector3(0, 0.4, 0)
+
+[node name="Camera3D" type="Camera3D" parent="player"]
+position = Vector3(0, 2.5, 5)
+current = true
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="LevelLabel" type="Label" parent="HUD"]
+offset_left = 28.0
+offset_top = 4.0
+offset_right = 520.0
+offset_bottom = 26.0
+theme_override_colors/font_color = Color(0.4, 1, 0.7, 1)
+theme_override_font_sizes/font_size = 14
+text = "LEVEL 4: FINAL SIMULATION"
+
+[node name="EnergyLabel" type="Label" parent="HUD"]
+offset_left = 28.0
+offset_top = 24.0
+offset_right = 260.0
+offset_bottom = 60.0
+theme_override_colors/font_color = Color(0.45, 1, 0.7, 1)
+theme_override_font_sizes/font_size = 24
+text = "ENERGY: 0 / 10"
+
+[node name="MissionLabel" type="Label" parent="HUD"]
+offset_left = 28.0
+offset_top = 62.0
+offset_right = 500.0
+offset_bottom = 92.0
+theme_override_colors/font_color = Color(1, 0.9, 0.35, 1)
+theme_override_font_sizes/font_size = 18
+text = "MISSION: Collect 10 Energy Crystals"
+
+[node name="HealthLabel" type="Label" parent="HUD"]
+offset_left = 28.0
+offset_top = 94.0
+offset_right = 230.0
+offset_bottom = 124.0
+theme_override_colors/font_color = Color(1, 0.42, 0.42, 1)
+theme_override_font_sizes/font_size = 18
+text = "HEALTH: 100"
+
+[node name="ChancesLabel" type="Label" parent="HUD"]
+offset_left = 28.0
+offset_top = 118.0
+offset_right = 230.0
+offset_bottom = 146.0
+theme_override_colors/font_color = Color(1, 0.8, 0.35, 1)
+theme_override_font_sizes/font_size = 18
+text = "CHANCES: 3 / 3"
+
+[node name="Crosshair" type="Label" parent="HUD"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -16.0
+offset_right = 8.0
+offset_bottom = 16.0
+theme_override_colors/font_color = Color(0.45, 1, 0.7, 0.9)
+theme_override_font_sizes/font_size = 24
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StoryLabel" type="Label" parent="HUD"]
+offset_left = 28.0
+offset_top = 148.0
+offset_right = 650.0
+offset_bottom = 174.0
+theme_override_colors/font_color = Color(0.65, 0.82, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "Every crystal is a fragment of the world you are trying to save."
+autowrap_mode = 2
